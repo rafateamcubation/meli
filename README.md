@@ -1,10 +1,7 @@
 # Contador de visualização de anúncios
 
 
-  findByTitulo
+  Incluir endpoine de delete dos Anuncio
 
-  findAll 
- 
-  
-    
+  Criar a entidade, repository, service e controller para Visualizacao
 

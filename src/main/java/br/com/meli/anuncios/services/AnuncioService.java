@@ -1,15 +1,18 @@
 package br.com.meli.anuncios.services;
 
-import br.com.meli.anuncios.dto.AnuncioDto;
+import br.com.meli.anuncios.dto.AnuncioDtoIn;
+import br.com.meli.anuncios.dto.AnuncioDtoOut;
 
 import java.util.List;
 
 public interface AnuncioService {
-    AnuncioDto create(AnuncioDto anuncioDto);
+    AnuncioDtoOut create(AnuncioDtoIn anuncioDtoIn);
 
-    AnuncioDto findById(Long id);
+    AnuncioDtoOut findById(Long id);
 
-    List<AnuncioDto> findAll();
+    List<AnuncioDtoOut> findAll();
 
-    AnuncioDto update(AnuncioDto anuncioDto);
+    AnuncioDtoOut update(AnuncioDtoOut anuncioDtoOut);
+
+    void deleteById(Long id);
 }

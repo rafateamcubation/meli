@@ -1,6 +1,7 @@
 package br.com.meli.anuncios.controllers;
 
-import br.com.meli.anuncios.dto.AnuncioDto;
+import br.com.meli.anuncios.dto.AnuncioDtoIn;
+import br.com.meli.anuncios.dto.AnuncioDtoOut;
 import br.com.meli.anuncios.services.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,25 +18,31 @@ public class AnuncioController {
     private AnuncioService anuncioService;
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody AnuncioDto anuncioDto){
-        return new ResponseEntity<>(anuncioService.create(anuncioDto), HttpStatus.CREATED);
+    public ResponseEntity<AnuncioDtoOut> create(@RequestBody AnuncioDtoIn anuncioDtoIn){
+        return new ResponseEntity<>(anuncioService.create(anuncioDtoIn), HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id){
+    public ResponseEntity<AnuncioDtoOut> findById(@PathVariable Long id){
         return new ResponseEntity<>(anuncioService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity<?> findAll() {
-        List<AnuncioDto> dtos = anuncioService.findAll();
+    public ResponseEntity<List<AnuncioDtoOut>> findAll() {
+        List<AnuncioDtoOut> dtos = anuncioService.findAll();
         return ResponseEntity.ok(dtos);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody AnuncioDto anuncioDto) {
-        anuncioDto.setId(id);
-        AnuncioDto returnDto = anuncioService.update(anuncioDto);
+    public ResponseEntity<AnuncioDtoOut> update(@PathVariable Long id, @RequestBody AnuncioDtoOut anuncioDtoOut) {
+        anuncioDtoOut.setId(id);
+        AnuncioDtoOut returnDto = anuncioService.update(anuncioDtoOut);
         return ResponseEntity.ok(returnDto);
+    }
+
+    @DeleteMapping({"{id}"})
+    public ResponseEntity<AnuncioDtoOut> deleteById(@PathVariable long id) {
+        anuncioService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

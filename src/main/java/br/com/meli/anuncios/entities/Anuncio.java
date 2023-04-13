@@ -1,4 +1,4 @@
-package br.com.meli.anuncios.entitites;
+package br.com.meli.anuncios.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

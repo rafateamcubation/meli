@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnuncioDto {
+public class AnuncioDtoOut {
 
     private Long id;
 

@@ -12,4 +12,6 @@ public interface AnuncioService {
     List<AnuncioDto> findAll();
 
     AnuncioDto update(AnuncioDto anuncioDto);
+
+    void delete(Long id);
 }

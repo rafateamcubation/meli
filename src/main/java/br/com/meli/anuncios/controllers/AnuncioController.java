@@ -1,6 +1,6 @@
 package br.com.meli.anuncios.controllers;
 
-import br.com.meli.anuncios.dto.AnuncioDtoIn;
+import br.com.meli.anuncios.dto.AnuncioDto;
 import br.com.meli.anuncios.dto.AnuncioDtoOut;
 import br.com.meli.anuncios.services.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,6 @@ public class AnuncioController {
     @Autowired
     private AnuncioService anuncioService;
 
-    @PostMapping
-    public ResponseEntity<AnuncioDtoOut> create(@RequestBody AnuncioDtoIn anuncioDtoIn){
-        return new ResponseEntity<>(anuncioService.create(anuncioDtoIn), HttpStatus.CREATED);
-    }
-
     @GetMapping("{id}")
     public ResponseEntity<AnuncioDtoOut> findById(@PathVariable Long id){
         return new ResponseEntity<>(anuncioService.findById(id), HttpStatus.OK);
@@ -33,10 +28,14 @@ public class AnuncioController {
         return ResponseEntity.ok(dtos);
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<AnuncioDtoOut> update(@PathVariable Long id, @RequestBody AnuncioDtoOut anuncioDtoOut) {
-        anuncioDtoOut.setId(id);
-        AnuncioDtoOut returnDto = anuncioService.update(anuncioDtoOut);
+    @PostMapping
+    public ResponseEntity<AnuncioDtoOut> create(@RequestBody AnuncioDto anuncioDto){
+        return new ResponseEntity<>(anuncioService.create(anuncioDto), HttpStatus.CREATED);
+    }
+
+    @PutMapping
+    public ResponseEntity<AnuncioDtoOut> update(@RequestBody AnuncioDto anuncioDto) {
+        AnuncioDtoOut returnDto = anuncioService.update(anuncioDto);
         return ResponseEntity.ok(returnDto);
     }
 

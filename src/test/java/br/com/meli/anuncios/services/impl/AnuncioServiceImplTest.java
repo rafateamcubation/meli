@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 @SpringBootTest
 class AnuncioServiceImplTest {
@@ -23,6 +24,7 @@ class AnuncioServiceImplTest {
     public static final String DESCRICAO = "Metal";
     public static final double PRECO_NORMAL = 20.50;
     public static final double PRECO_PROMO = 19.50;
+    public static final int INDEX = 0;
     @InjectMocks
     private AnuncioServiceImpl service;
     @Mock
@@ -50,6 +52,7 @@ class AnuncioServiceImplTest {
 
         Assertions.assertNotNull(response);
         Assertions.assertEquals(AnuncioDtoOut.class, response.getClass());
+
         Assertions.assertEquals(ID,response.getId());
         Assertions.assertEquals(NAME, response.getName());
         Assertions.assertEquals(DESCRICAO, response.getDescricao());
@@ -60,6 +63,18 @@ class AnuncioServiceImplTest {
     @Test
     @DisplayName("Busca todos anuncios")
     void searchAllAnunciosTest() {
+        Mockito.when(repository.findAll()).thenReturn(List.of(anuncio));
+
+        List<AnuncioDtoOut> response = service.findAll();
+        Assertions.assertNotNull(response);
+        Assertions.assertEquals(1, response.size());
+        Assertions.assertEquals(AnuncioDtoOut.class, response.get(INDEX).getClass());
+
+        Assertions.assertEquals(ID,response.get(INDEX).getId());
+        Assertions.assertEquals(NAME, response.get(INDEX).getName());
+        Assertions.assertEquals(DESCRICAO, response.get(INDEX).getDescricao());
+        Assertions.assertEquals(PRECO_NORMAL, response.get(INDEX).getPrecoNormal());
+        Assertions.assertEquals(PRECO_PROMO, response.get(INDEX).getPrecoPromo());
     }
 
     @Test

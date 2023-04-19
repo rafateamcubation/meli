@@ -30,12 +30,12 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Override
     public List<AnuncioDtoOut> findAll() {
-        List<Anuncio> entities = repository.findAll();
+        List<Anuncio> anuncios = repository.findAll();
 
-        if (entities.isEmpty()){
+        if (anuncios.isEmpty()){
             throw new ResourceNotFoundException("Não existem anúncios!");
         } else {
-            return entities.stream().map(e -> AnuncioDtoOut.fromModel(e))
+            return anuncios.stream().map(e -> AnuncioDtoOut.fromModel(e))
                     .collect(Collectors
                             .toList());
         }

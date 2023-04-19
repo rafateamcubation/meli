@@ -22,10 +22,10 @@ public class AnuncioServiceImpl implements AnuncioService {
 
     @Override
     public AnuncioDtoOut findById(Long id) {
-        Anuncio entity = repository.findById(id)
+        Anuncio anuncio = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Anuncio nao encontrado"));
 
-        return AnuncioDtoOut.fromModel(entity);
+        return AnuncioDtoOut.fromModel(anuncio);
     }
 
     @Override
